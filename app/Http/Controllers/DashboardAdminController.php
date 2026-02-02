@@ -11,10 +11,6 @@ class DashboardAdminController extends Controller
     public function index()
     {
         $hariIni = date('Y-m-d');
-
-        // ============================
-        //     DATA STATISTIK UTAMA
-        // ============================
         $total_transaksi = Transaksi::whereDate('tanggal_transaksi', $hariIni)->count();
         $total_pendapatan_hari_ini = Transaksi::whereDate('tanggal_transaksi', $hariIni)->sum('total_harga');
         $total_pendapatan = Transaksi::sum('total_harga');
@@ -23,9 +19,6 @@ class DashboardAdminController extends Controller
         $stok_menipis = Produk::where('stok', '<=', 5)->get();
         $total_kategori = DB::table('kategori_produk')->count();
 
-        // ============================
-        //     GRAFIK 7 HARI TERAKHIR
-        // ============================
         $grafik_harian = Transaksi::select(
                 DB::raw('DATE(tanggal_transaksi) as tanggal'),
                 DB::raw('SUM(total_harga) as total')
@@ -38,9 +31,6 @@ class DashboardAdminController extends Controller
         $harian_labels = $grafik_harian->pluck('tanggal');
         $harian_values = $grafik_harian->pluck('total');
 
-        // ============================
-        //   GRAFIK 12 BULAN TERAKHIR
-        // ============================
         $grafik_bulanan = Transaksi::select(
                 DB::raw("DATE_FORMAT(tanggal_transaksi, '%Y-%m') as bulan"),
                 DB::raw("SUM(total_harga) as total")

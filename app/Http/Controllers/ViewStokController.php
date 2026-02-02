@@ -8,18 +8,11 @@ use Illuminate\Http\Request;
 
 class ViewStokController extends Controller
 {
-    /**
-     * Menampilkan daftar stok produk untuk kasir (hanya lihat)
-     */
+//hanya melihat stok//
     public function index(Request $request)
     {
-        // 1. Mengambil semua kategori untuk filter dropdown
         $kategori = KategoriProduk::all();
-
-        // 2. Query dasar produk dengan relasi kategori
         $query = Produk::with('kategori');
-
-        // 3. Logika Pencarian (Nama Produk atau Kode Produk)
         if ($request->filled('keyword')) {
             $keyword = $request->keyword;
             $query->where(function($q) use ($keyword) {
@@ -28,15 +21,12 @@ class ViewStokController extends Controller
             });
         }
 
-        // 4. Logika Filter Kategori
         if ($request->filled('kategori_id')) {
             $query->where('kategori_id', $request->kategori_id);
         }
 
-        // 5. Urutkan stok dari yang paling sedikit ke banyak
         $produk = $query->orderBy('stok', 'asc')->get();
 
-        // 6. Arahkan ke file blade yang tadi dibuat
         return view('kasir.viewstok', compact('produk', 'kategori'));
     }
 }

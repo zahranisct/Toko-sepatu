@@ -29,8 +29,6 @@
         max-width: 850px;
         color: #333;
     }
-
-    /* Grid System for Form */
     .form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -72,7 +70,6 @@
         background: #fafafa;
     }
 
-    /* Input Prefix for Price */
     .price-input-wrapper {
         position: relative;
     }
@@ -90,7 +87,6 @@
         padding-left: 45px;
     }
 
-    /* Action Buttons */
     .action-wrapper {
         display: flex;
         gap: 15px;

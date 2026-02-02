@@ -5,13 +5,12 @@
 
 @section('content')
 
-{{-- LOGIKA MENCARI ID KASIR BERDASARKAN USER LOGIN --}}
 @php
     $total = 0;
     foreach($keranjang as $item){
         $total += $item['harga'] * $item['qty'];
     }
-    // Cari record kasir berdasarkan user_id yang sedang login
+
     $dataKasir = \App\Models\Kasir::where('user_id', Auth::user()->id)->first();
 @endphp
 

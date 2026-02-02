@@ -24,8 +24,6 @@
         <h2 style="margin:0;">LAPORAN TRANSAKSI</h2>
         <p style="margin:5px 0;">Periode: {{ $periode }}</p>
     </div>
-
-    {{-- Statistik sesuai permintaan --}}
     <div class="stats-container">
         <div class="stat-box">
             <span>Total Pendapatan</span>
@@ -54,10 +52,9 @@
         <tbody>
             @forelse($transaksi as $trx)
             <tr>
-                <td>{{ $trx->created_at->format('d/m/Y H:i') }}</td>
+                <td>{{ $trx->created_at->format('d-m-Y H:i') }}</td>
                 <td>{{ $trx->kasir->nama_kasir ?? 'N/A' }}</td>
                 <td>
-                    {{-- Di Model Anda namanya 'detail', bukan 'detailTransaksi' --}}
                     @foreach($trx->detail as $item)
                         • {{ $item->produk->nama_produk ?? 'Produk Dihapus' }} ({{ $item->qty }})<br>
                     @endforeach
@@ -74,7 +71,7 @@
     </table>
 
     <div style="margin-top: 30px; text-align: right; font-size: 12px;">
-        <p>Dicetak pada: {{ date('d/m/Y H:i:s') }}</p>
+        <p>Dicetak pada: {{ date('d-m-Y H:i:s') }}</p>
     </div>
 
     <div class="no-print" style="margin-top: 30px; text-align: center;">

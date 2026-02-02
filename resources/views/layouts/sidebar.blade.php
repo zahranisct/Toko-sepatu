@@ -18,7 +18,6 @@
         box-sizing: border-box;
     }
 
-    /* Logo Section */
     .logo-container {
         display: flex;
         flex-direction: column;
@@ -44,7 +43,6 @@
         text-transform: uppercase;
     }
 
-    /* Menu Section */
     .menu {
         display: flex;
         flex-direction: column;
@@ -87,7 +85,6 @@
         color: #000 !important;
     }
 
-    /* Footer / Logout */
     .sidebar-footer {
         margin-top: auto;
         padding-top: 20px;
@@ -112,12 +109,11 @@
     }
 
     .logout-btn:hover {
-        background: #ff4d4d; /* Warna merah saat hover logout agar lebih jelas */
+        background: #ff4d4d;
         border-color: #ff4d4d;
         color: #fff;
     }
 
-    /* Scrollbar */
     .menu::-webkit-scrollbar { width: 4px; }
     .menu::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
 </style>

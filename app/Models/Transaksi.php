@@ -21,20 +21,16 @@ class Transaksi extends Model
 
 
     public $timestamps = true;
-
-    // Relasi transaksi -> user login
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Relasi transaksi -> kasir yang dipilih
     public function kasir()
     {
         return $this->belongsTo(Kasir::class, 'kasir_id');
     }
-
-    // Relasi transaksi -> detail
+    
     public function detail()
     {
         return $this->hasMany(DetailTransaksi::class, 'transaksi_id');

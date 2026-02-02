@@ -6,7 +6,6 @@
 @section('content')
 
 <style>
-    /* Greeting Section */
     .welcome-header {
         margin-bottom: 40px;
         color: #fff;
@@ -27,7 +26,6 @@
         margin-top: 8px;
     }
 
-    /* Grid Layout */
     .grid-kasir {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -35,7 +33,6 @@
         max-width: 1000px;
     }
 
-    /* Card Styling */
     .card-kasir {
         background: #fff;
         padding: 35px;
@@ -71,7 +68,6 @@
         letter-spacing: -1px;
     }
 
-    /* Icon Background Decal */
     .card-icon-decal {
         position: absolute;
         right: -10px;
@@ -82,7 +78,6 @@
         color: #000;
     }
 
-    /* Featured Card */
     .featured-card {
         grid-column: span 2;
         background: #000;
@@ -104,7 +99,6 @@
         opacity: 0.15;
     }
 
-    /* Quick Action Button */
     .btn-pos {
         margin-top: 30px;
         display: inline-flex;
@@ -127,7 +121,6 @@
 </style>
 
 <div class="welcome-header">
-    {{-- Menampilkan Username di dalam tanda kutip --}}
     <h1>HALO, SELAMAT DATANG "{{ strtoupper(Auth::user()->username) }}"! 👋</h1>
     <p>Pantau performa penjualanmu hari ini.</p>
 </div>

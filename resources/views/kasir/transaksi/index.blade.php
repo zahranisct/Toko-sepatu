@@ -115,7 +115,6 @@
         
         <button type="submit" class="btn-solid">Cari Produk</button>
 
-        {{-- Tombol Reset - Hanya muncul jika ada keyword --}}
         @if(request('keyword'))
             <a href="{{ route('transaksi.index') }}" class="btn-solid" style="background: #f5f5f5; color: #666; border: 1px solid #ddd;">
                 <i data-lucide="refresh-cw" style="width: 14px;"></i> Reset
@@ -124,7 +123,6 @@
     </form>
 </div>
 
-    {{-- Katalog --}}
     <div class="section-card">
         <div class="card-header">
             <i data-lucide="box" style="width: 18px;"></i>
@@ -174,7 +172,6 @@
         </div>
     </div>
 
-    {{-- Keranjang Belanja --}}
     <div class="section-card">
         <form id="formHapusMasal" action="{{ route('keranjang.hapusMasal') }}" method="POST">
             @csrf
@@ -271,7 +268,6 @@
     </div>
 </div>
 
-{{-- Hidden Update Form --}}
 <form id="hiddenUpdateForm" action="{{ route('transaksi.updateItem') }}" method="POST" style="display:none;">
     @csrf
     <input type="hidden" name="id" id="h_id">

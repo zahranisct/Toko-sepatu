@@ -7,13 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    // Halaman Login
     public function loginView()
     {
         return view('auth.login');
     }
 
-    // Proses Login
     public function login(Request $request)
     {
         $request->validate([
@@ -38,7 +36,6 @@ class AuthController extends Controller
         return back()->with('error', 'Username atau password salah.');
     }
 
-    // Logout
     public function logout()
     {
         Auth::logout();

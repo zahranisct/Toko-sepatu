@@ -59,7 +59,6 @@
             backdrop-filter: blur(2px);
         }
 
-        /* ===== TOPBAR ===== */
         .topbar {
             position: fixed;
             top: 0;
@@ -93,7 +92,6 @@
             font-weight: 500;
         }
 
-        /* ===== CONTENT AREA ===== */
         .main-container {
             margin-left: var(--sidebar-width);
             padding-top: var(--topbar-height);
@@ -153,12 +151,10 @@
 
         <div class="user-profile">
             <div style="text-align: right; margin-right: 12px;">
-                {{-- Menampilkan Nama Asli (Contoh: Ahmad Dhani) --}}
                 <div style="font-weight: 700; font-size: 14px; color: #fff; line-height: 1.2;">
                     {{ auth()->user()->name }}
                 </div>
-                
-                {{-- Menampilkan Username Secara Otomatis (Contoh: KASIR: ADHANI) --}}
+
                 <div style="font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
                     @if(auth()->user()->role === 'admin')
                         ADMINISTRATOR ACCOUNT

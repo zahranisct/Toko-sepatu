@@ -64,7 +64,6 @@ class KasirController extends Controller
 
     public function edit($id)
     {
-        // WAJIB pakai with('user') agar data login tidak NULL di view
         $kasir = Kasir::with('user')->findOrFail($id);
         return view('admin.kasir.edit', compact('kasir'));
     }
@@ -81,7 +80,6 @@ class KasirController extends Controller
 
         try {
             DB::transaction(function () use ($request, $kasir) {
-                // Update tabel User
                 if ($kasir->user) {
                     $kasir->user->update([
                         'nama'     => $request->nama_kasir,
@@ -93,7 +91,6 @@ class KasirController extends Controller
                     }
                 }
 
-                // Update tabel Kasir
                 $kasir->update([
                     'nama_kasir' => $request->nama_kasir,
                     'nomor_hp'   => $request->nomor_hp,

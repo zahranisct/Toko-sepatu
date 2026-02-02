@@ -6,7 +6,6 @@
 @section('content')
 
 <style>
-    /* Section Header */
     .header-container {
         display: flex;
         align-items: center;
@@ -22,7 +21,6 @@
         margin: 0;
     }
 
-    /* Form Card */
     .form-card {
         background: white;
         padding: 40px;
@@ -33,7 +31,6 @@
         color: #333;
     }
 
-    /* Form Group */
     .form-group {
         margin-bottom: 25px;
     }
@@ -65,7 +62,6 @@
         background: #fafafa;
     }
 
-    /* Button Actions */
     .action-wrapper {
         display: flex;
         gap: 15px;
@@ -175,7 +171,6 @@
 </div>
 
 <script>
-    // Pastikan icon lucide aktif
     lucide.createIcons();
 </script>
 

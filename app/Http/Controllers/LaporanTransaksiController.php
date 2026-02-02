@@ -15,54 +15,49 @@ class LaporanTransaksiController extends Controller
         return view('admin.laporan_transaksi', $data);
     }
 
-    /**
-     * Fungsi untuk menangani pencetakan laporan
-     */
     public function cetak(Request $request)
     {
         $data = $this->getLaporanData($request);
-        // Menggunakan view khusus cetak yang lebih bersih
         return view('admin.cetak_laporan', $data);
     }
 
-    /**
-     * Logic utama untuk memfilter data agar bisa digunakan di index maupun cetak
-     */
     private function getLaporanData(Request $request)
     {
         $tgl_mulai = $request->get('tgl_mulai');
         $tgl_selesai = $request->get('tgl_selesai');
+        $bulan_pilihan = $request->get('bulan');
 
-        // Menentukan range tanggal
-        if ($tgl_mulai && $tgl_selesai) {
+        if ($bulan_pilihan) {
+            $start = Carbon::parse($bulan_pilihan)->startOfMonth();
+            $end = Carbon::parse($bulan_pilihan)->endOfMonth();
+
+            $tgl_mulai = $start->format('Y-m-d');
+            $tgl_selesai = $end->format('Y-m-d');
+        } elseif ($tgl_mulai && $tgl_selesai) {
+
             $start = Carbon::parse($tgl_mulai)->startOfDay();
             $end = Carbon::parse($tgl_selesai)->endOfDay();
         } else {
+
             $start = Carbon::now()->startOfMonth();
             $end = Carbon::now()->endOfMonth();
         }
 
-        // 1. Ambil Transaksi dengan Eager Loading (Penting agar nama produk muncul)
-        // Kita panggil 'detail.produk' agar saat looping transaksi, data produk sudah tersedia
         $transaksi = Transaksi::with(['kasir', 'detail.produk'])
             ->whereBetween('created_at', [$start, $end])
             ->orderBy('created_at', 'desc')
             ->get();
 
-        // 2. Ambil ID transaksi untuk query agregat
         $trx_ids = $transaksi->pluck('id');
 
-        // 3. Ambil Detail Transaksi untuk statistik
         $detail_transaksi = DetailTransaksi::with('produk.kategori')
             ->whereIn('transaksi_id', $trx_ids)
             ->get();
 
-        // 4. Hitung Statistik Utama
         $total_pendapatan = $transaksi->sum('total_harga');
         $total_produk_terjual = $detail_transaksi->sum('qty');
         $total_transaksi = $transaksi->count();
 
-        // 5. Cari Produk & Kategori Terlaris
         $produk_terlaris = DetailTransaksi::select('produk_id')
             ->whereIn('transaksi_id', $trx_ids)
             ->groupBy('produk_id')
@@ -82,6 +77,7 @@ class LaporanTransaksiController extends Controller
             'kategori_terlaris' => $kategori_terlaris,
             'tgl_mulai' => $tgl_mulai,
             'tgl_selesai' => $tgl_selesai,
+            'bulan_pilihan' => $bulan_pilihan,
             'periode' => $start->format('d M Y') . ' - ' . $end->format('d M Y')
         ];
     }

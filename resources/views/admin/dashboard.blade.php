@@ -108,7 +108,6 @@
         font-weight: bold;
     }
 
-    /* Alert Style */
     .alert-stok {
         background: #fef2f2;
         border-left: 5px solid #ef4444;
@@ -121,7 +120,6 @@
         color: #b91c1c;
     }
 
-    /* Grid Stats */
     .stats-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -167,7 +165,6 @@
         font-size: 24px;
     }
 
-    /* Icon Colors */
     .blue { background: #e0e7ff; }
     .green { background: #dcfce7; }
     .gold { background: #fef9c3; }
@@ -175,7 +172,6 @@
     .purple { background: #f3e8ff; }
     .dark { background: #f1f5f9; }
 
-    /* Charts Layout */
     .charts-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -206,11 +202,9 @@
     const harianLabels = @json($harian_labels);
     const harianValues = @json($harian_values);
 
-    // Chart Global Config
     Chart.defaults.font.family = "'Inter', sans-serif";
     Chart.defaults.color = '#64748b';
 
-    // Grafik Transaksi
     new Chart(document.getElementById('chartTransaksi'), {
         type: 'line',
         data: {
@@ -232,7 +226,6 @@
         }
     });
 
-    // Grafik Pendapatan
     new Chart(document.getElementById('chartPendapatan'), {
         type: 'bar',
         data: {

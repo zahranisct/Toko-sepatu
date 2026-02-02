@@ -58,12 +58,11 @@ class TransaksiController extends Controller
     {
         $keranjang = Session::get('keranjang', []);
         $id = $request->id;
-        $qty = (int) $request->qty; // Pastikan integer
+        $qty = (int) $request->qty;
 
         if (isset($keranjang[$id])) {
             $produk = Produk::find($id);
-            
-            // Validasi keras: Jika input manual lebih besar dari stok
+
             if ($qty > $produk->stok) {
                 return redirect()->back()->with('error', "Gagal! Stok {$produk->nama_produk} tidak mencukupi (Maks: {$produk->stok}).");
             }
@@ -96,7 +95,6 @@ class TransaksiController extends Controller
             return redirect()->route('transaksi.index')->with('error', 'Keranjang kosong!');
         }
 
-        // Validasi stok super ketat
         foreach ($keranjang as $id => $item) {
             $produk = Produk::find($id);
             
@@ -167,13 +165,11 @@ class TransaksiController extends Controller
             }
 
             DB::commit();
-            
-            // SIMPAN ID UNTUK CETAK STRUK DI NOTIFIKASI
+
             $last_id = $transaksi->id;
             
             Session::forget('keranjang');
-            
-            // REDIRECT DENGAN TAMBAHAN LAST_ID
+
             return redirect()->route('transaksi.index')
                 ->with('success', 'Transaksi Berhasil Disimpan!')
                 ->with('last_id', $last_id);

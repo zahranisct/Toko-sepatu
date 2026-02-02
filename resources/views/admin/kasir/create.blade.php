@@ -6,7 +6,6 @@
 @section('content')
 
 <style>
-    /* Section Header */
     .header-section {
         display: flex;
         align-items: center;
@@ -22,7 +21,6 @@
         color: #fff;
     }
 
-    /* Solid Card Styling */
     .solid-card {
         background: white;
         padding: 40px;
@@ -33,7 +31,6 @@
         margin: 0 auto;
     }
 
-    /* Form Layout */
     .form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -58,7 +55,6 @@
         color: #888;
     }
 
-    /* Input Wrapper with Icons */
     .input-wrapper {
         position: relative;
         display: flex;
@@ -93,7 +89,6 @@
         padding-left: 16px;
     }
 
-    /* Action Buttons */
     .action-wrapper {
         display: flex;
         gap: 15px;
@@ -142,7 +137,6 @@
         color: #000;
     }
 
-    /* Error Validation */
     .text-danger {
         color: #e53e3e;
         font-size: 12px;

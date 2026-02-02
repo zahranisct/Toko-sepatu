@@ -10,11 +10,11 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $table = 'user'; // Sesuai database kamu
+    protected $table = 'user';
 
     protected $fillable = [
-        'nama',      // Tadi di strukturmu ada kolom nama
-        'username',  // Kolom username untuk login
+        'nama',
+        'username',
         'password',
         'role',
     ];

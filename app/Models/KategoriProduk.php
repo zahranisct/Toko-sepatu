@@ -10,12 +10,11 @@ class KategoriProduk extends Model
 
     protected $fillable = [
         'nama_kategori',
-        'kode_kategori', // tambahkan ini
+        'kode_kategori',
     ];
 
     public $timestamps = true;
 
-    // Relasi: 1 kategori memiliki banyak produk
     public function produk()
     {
         return $this->hasMany(Produk::class, 'kategori_id');

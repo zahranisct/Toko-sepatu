@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Courier New', Courier, monospace;
-            width: 280px; /* Standar thermal printer */
+            width: 280px;
             margin: auto;
             font-size: 13px;
             color: #000;
@@ -20,7 +20,7 @@
             width: 70px;
             height: auto;
             margin-bottom: 5px;
-            filter: grayscale(100%); /* Biar lebih tajam di printer hitam putih */
+            filter: grayscale(100%);
         }
 
         .item-row {
@@ -55,7 +55,6 @@
             font-weight: bold;
         }
 
-        /* Sembunyikan tombol saat mencetak */
         @media print {
             .no-print {
                 display: none;
@@ -85,7 +84,7 @@
 </div>
 <div class="flex-between">
     <span>Tanggal:</span>
-    <span>{{ $transaksi->created_at->format('d/m/Y H:i') }}</span>
+    <span>{{ $transaksi->created_at->format('d-m-Y H:i') }}</span>
 </div>
 <div class="flex-between">
     <span>Kasir:</span>
@@ -143,8 +142,6 @@
 </div>
 
 <div class="line"></div>
-
-{{-- BAGIAN TOMBOL KENDALI --}}
 <div class="center no-print" style="margin-top: 20px;">
     <button class="btn-print" onclick="window.print()">CETAK STRUK</button>
     

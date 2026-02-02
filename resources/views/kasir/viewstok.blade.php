@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
 @section('title', 'Cek Stok Produk')
-@section('page_title', 'Stok Barang')
+@section('page_title', 'Stok Sepatu')
 
 @section('content')
 
 <style>
-    /* Header Section */
     .header-section {
         display: flex;
         justify-content: space-between;
@@ -23,7 +22,6 @@
         color: #fff;
     }
 
-    /* Filter & Search Card */
     .filter-card {
         background: #fff;
         padding: 25px;
@@ -73,7 +71,6 @@
         background: #333;
     }
 
-    /* Table Styling */
     .table-card {
         background: #fff;
         border-radius: 12px;
@@ -129,12 +126,11 @@
 <div class="header-section">
     <div>
         <h2>Informasi Stok</h2>
-        <p style="color: #bbb; font-size: 14px; margin-top: 5px;">Pantau ketersediaan barang secara real-time.</p>
+        <p style="color: #bbb; font-size: 14px; margin-top: 5px;">Pantau ketersediaan sepatu.</p>
     </div>
 </div>
 
 <div class="filter-card">
-    {{-- Pastikan route ini sesuai dengan route index kasir anda --}}
     <form action="{{ route('kasir.viewstok') }}" method="GET" class="search-form">
         <div class="input-group">
             <input type="text" name="keyword" class="form-control" placeholder="Cari nama atau kode produk..." value="{{ request('keyword') }}">

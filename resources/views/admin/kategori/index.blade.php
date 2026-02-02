@@ -6,7 +6,6 @@
 @section('content')
 
 <style>
-    /* Container Styling */
     .header-section {
         display: flex;
         justify-content: space-between;
@@ -22,13 +21,12 @@
         margin: 0;
     }
 
-    /* Modern Button */
     .btn-add {
         padding: 12px 24px;
         background: #fff;
         color: #000;
         text-decoration: none;
-        border-radius: 4px; /* Adidas style sharper corners */
+        border-radius: 4px;
         font-weight: 700;
         text-transform: uppercase;
         font-size: 13px;
@@ -45,16 +43,14 @@
         transform: translateY(-2px);
     }
 
-    /* Glass Card */
     .glass-card {
-        background: rgba(255, 255, 255, 1); /* Putih bersih agar data terbaca */
+        background: rgba(255, 255, 255, 1);
         border-radius: 12px;
         padding: 30px;
         box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         color: #333;
     }
 
-    /* Search Box */
     .search-wrapper {
         margin-bottom: 25px;
         display: flex;
@@ -92,7 +88,6 @@
         background: #000;
     }
 
-    /* Alert Styling */
     .alert {
         padding: 15px 20px;
         border-radius: 8px;
@@ -107,11 +102,10 @@
     .alert-info { background: #ebf8ff; color: #2c5282; border-left: 5px solid #4299e1; }
     .alert-danger { background: #fff5f5; color: #c53030; border-left: 5px solid #f56565; }
 
-    /* Custom Table */
     .custom-table {
         width: 100%;
         border-collapse: separate;
-        border-spacing: 0 10px; /* Memberi jarak antar baris */
+        border-spacing: 0 10px;
         margin-top: 10px;
     }
 
@@ -134,7 +128,6 @@
         border-bottom: 1px solid #f7f7f7;
     }
 
-    /* Action Buttons */
     .action-link {
         padding: 8px 14px;
         border-radius: 6px;
@@ -248,7 +241,6 @@
 </div>
 
 <script>
-    // Memastikan icon ter-render di dalam content yang baru di-load
     lucide.createIcons();
 </script>
 

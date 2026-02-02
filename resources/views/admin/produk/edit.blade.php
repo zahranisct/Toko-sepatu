@@ -6,7 +6,6 @@
 @section('content')
 
 <style>
-    /* Section Header */
     .header-section {
         display: flex;
         align-items: center;
@@ -22,7 +21,6 @@
         color: #fff;
     }
 
-    /* Solid Card Styling */
     .solid-card {
         background: white;
         padding: 40px;
@@ -33,7 +31,6 @@
         color: #333;
     }
 
-    /* Form Grid System */
     .form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -75,7 +72,6 @@
         background: #fcfcfc;
     }
 
-    /* Price Input Styling */
     .price-input-wrapper {
         position: relative;
     }
@@ -93,7 +89,6 @@
         padding-left: 45px;
     }
 
-    /* Action Buttons */
     .action-wrapper {
         display: flex;
         gap: 15px;
@@ -213,7 +208,6 @@
 </div>
 
 <script>
-    // Memuat icon Lucide
     lucide.createIcons();
 </script>
 

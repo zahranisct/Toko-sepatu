@@ -166,7 +166,6 @@
     </div>
 </div>
 
-{{-- Elemen pagination disembunyikan tapi link-nya diambil oleh JS --}}
 <div id="pagination-links" style="display: none;">
     {{ $transaksi->links() }}
 </div>
@@ -182,7 +181,6 @@
         let nextUrl = $('#pagination-links a[rel="next"]').attr('href');
 
         container.on('scroll', function() {
-            // Cek jika sudah scroll sampai bawah container
             if (container.scrollTop() + container.innerHeight() >= container[0].scrollHeight - 50) {
                 if (nextUrl) {
                     loadMoreData();
@@ -192,7 +190,7 @@
 
         function loadMoreData() {
             let currentUrl = nextUrl;
-            nextUrl = null; // Mencegah request ganda
+            nextUrl = null;
 
             loading.show();
 
@@ -205,15 +203,12 @@
             })
             .done(function(data) {
                 loading.hide();
-                
-                // Ambil baris tabel baru dari hasil response
+
                 let newRows = $(data).find('#transaksi-data').html();
                 tbody.append(newRows);
-                
-                // Update URL next page
+
                 nextUrl = $(data).find('#pagination-links a[rel="next"]').attr('href');
-                
-                // Re-render icon lucide untuk baris baru
+
                 lucide.createIcons();
             })
             .fail(function() {

@@ -6,7 +6,6 @@
 @section('content')
 
 <style>
-    /* --- HEADER & LAYOUT --- */
     .report-header {
         display: flex;
         justify-content: space-between;
@@ -23,7 +22,6 @@
         margin: 0;
     }
 
-    /* --- MODERN FILTER SECTION (Glassmorphism) --- */
     .filter-box {
         background: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(10px);
@@ -46,7 +44,7 @@
         flex-direction: column;
         gap: 8px;
         flex: 1;
-        min-width: 200px;
+        min-width: 180px;
     }
 
     .filter-group label {
@@ -117,7 +115,6 @@
         color: #ff4d4d;
     }
 
-    /* --- STATS GRID --- */
     .stats-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -160,7 +157,6 @@
         color: #000;
     }
 
-    /* --- TABLE SECTION --- */
     .section-title {
         display: flex;
         align-items: center;
@@ -240,7 +236,6 @@
         gap: 10px;
     }
 
-    /* --- FOOTER SUMMARY --- */
     .report-footer-summary {
         background: #000;
         color: #fff;
@@ -286,14 +281,11 @@
         transform: scale(1.05);
     }
 
-    /* --- FIX PRINT - HIDE SIDEBAR & DASHBOARD --- */
     @media print {
-        /* Sembunyikan semua elemen navigasi dashboard bawaan layouts.app */
         nav, .sidebar, .navbar, .footer, aside, .btn-action, .filter-box, .alert-success, .btn-print-all, .no-print {
             display: none !important;
         }
 
-        /* Paksa konten laporan memenuhi lebar kertas */
         body, .main-content, .container, .wrapper {
             background: white !important;
             margin: 0 !important;
@@ -302,12 +294,10 @@
             display: block !important;
         }
 
-        /* Ubah teks header menjadi hitam agar jelas di kertas */
         .report-header h2, .section-title {
             color: #000 !important;
         }
 
-        /* Atur box agar tidak memiliki bayangan saat dicetak */
         .table-card, .stat-card, .report-footer-summary {
             box-shadow: none !important;
             border: 1px solid #ddd !important;
@@ -318,7 +308,6 @@
             color: #000 !important;
         }
         
-        /* Hilangkan background transparan pada badge saat print */
         .report-header div {
             background: #eee !important;
             color: #000 !important;
@@ -331,16 +320,32 @@
     <div style="background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 8px; color: #fff; font-size: 13px;">
         <i data-lucide="calendar" style="width: 16px; vertical-align: middle; margin-right: 5px;"></i>
         @if($tgl_mulai && $tgl_selesai)
-            {{ date('d/m/Y', strtotime($tgl_mulai)) }} - {{ date('d/m/Y', strtotime($tgl_selesai)) }}
+            {{ date('d-m-Y', strtotime($tgl_mulai)) }} - {{ date('d-m-Y', strtotime($tgl_selesai)) }}
         @else
             {{ date('F Y') }}
         @endif
     </div>
 </div>
 
-{{-- 🔍 FORM FILTER TANGGAL --}}
 <div class="filter-box">
     <form action="{{ route('admin.laporan') }}" method="GET" class="filter-form">
+        <div class="filter-group">
+            <label><i data-lucide="layers" style="width: 12px; margin-right: 5px;"></i> Pilih Bulan</label>
+            <select name="bulan" class="filter-input" onchange="this.form.submit()">
+                <option value="">-- Pilih Bulan --</option>
+                @for ($i = 0; $i < 12; $i++)
+                    @php
+                        $date = \Carbon\Carbon::now()->subMonths($i);
+                        $val = $date->format('Y-m');
+                        $label = $date->translatedFormat('F Y');
+                    @endphp
+                    <option value="{{ $val }}" {{ request('bulan') == $val ? 'selected' : '' }}>
+                        {{ $label }}
+                    </option>
+                @endfor
+            </select>
+        </div>
+
         <div class="filter-group">
             <label><i data-lucide="calendar-days" style="width: 12px; margin-right: 5px;"></i> Dari Tanggal</label>
             <input type="date" name="tgl_mulai" class="filter-input" value="{{ $tgl_mulai }}">
@@ -352,10 +357,10 @@
         </div>
 
         <button type="submit" class="btn-search">
-            <i data-lucide="filter" style="width: 16px;"></i>   Cari Berdasarkan Tanggal
+            <i data-lucide="filter" style="width: 16px;"></i>  Cari Data
         </button>
 
-        @if($tgl_mulai || $tgl_selesai)
+        @if($tgl_mulai || $tgl_selesai || request('bulan'))
             <a href="{{ route('admin.laporan') }}" class="btn-reset-link" title="Hapus Filter">
                 <i data-lucide="refresh-cw" style="width: 14px; margin-right: 5px;"></i> Reset
             </a>
@@ -370,7 +375,6 @@
     </div>
 @endif
 
-{{-- 📊 STAT CARDS --}}
 <div class="stats-grid">
     <div class="stat-card">
         <div class="stat-icon" style="background: #e6fffa; color: #38b2ac;">
@@ -403,7 +407,6 @@
     </div>
 </div>
 
-{{-- 📋 TABEL RINGKASAN TRANSAKSI --}}
 <div class="section-title">
     <i data-lucide="list"></i> Ringkasan Transaksi
 </div>
@@ -423,7 +426,7 @@
             @foreach($transaksi as $trx)
             <tr>
                 <td style="font-weight: 700; color: #999;">#{{ $trx->id }}</td>
-                <td>{{ $trx->created_at->format('d/m/Y H:i') }}</td>
+                <td>{{ $trx->created_at->format('d-m-Y H:i') }}</td>
                 <td style="font-weight: 600; text-transform: uppercase;">{{ $trx->kasir->nama_kasir ?? '-' }}</td>
                 <td style="text-align: right; font-weight: 800;">Rp {{ number_format($trx->total_harga,0,',','.') }}</td>
                 <td style="text-align: center;">
@@ -440,7 +443,6 @@
     </table>
 </div>
 
-{{-- 📦 DETAIL ITEM TRANSAKSI --}}
 <div class="section-title">
     <i data-lucide="box"></i> Detail Per Item
 </div>
@@ -472,7 +474,6 @@
     </table>
 </div>
 
-{{-- 🏁 TOTAL AKHIR & AKSI CETAK --}}
 <div class="report-footer-summary">
     <div>
         <div class="footer-label">Total Akumulasi Pendapatan</div>
@@ -485,9 +486,10 @@
     <i data-lucide="printer"></i>
     CETAK LAPORAN SEKARANG
 </a>
+</div>
 
 <p style="text-align: center; color: #fff; margin-top: 20px; font-size: 12px; opacity: 0.6;" class="no-print">
-    Laporan ini digenerate secara otomatis pada {{ date('d/m/Y H:i:s') }}
+    Laporan ini digenerate secara otomatis pada {{ date('d-m-Y H:i:s') }}
 </p>
 
 <script>

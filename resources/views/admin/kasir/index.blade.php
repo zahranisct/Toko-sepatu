@@ -6,7 +6,6 @@
 @section('content')
 
 <style>
-    /* Header Section */
     .header-section {
         display: flex;
         justify-content: space-between;
@@ -23,7 +22,6 @@
         color: #fff;
     }
 
-    /* Modern Button */
     .btn-add {
         padding: 12px 24px;
         background: #fff;
@@ -46,7 +44,6 @@
         transform: translateY(-2px);
     }
 
-    /* Search Card */
     .filter-card {
         background: #fff;
         padding: 20px;
@@ -86,7 +83,6 @@
         text-transform: uppercase;
     }
 
-    /* Table Styling */
     .table-card {
         background: #fff;
         border-radius: 12px;
@@ -117,7 +113,6 @@
         color: #333;
     }
 
-    /* Status Badges */
     .badge {
         padding: 5px 12px;
         border-radius: 20px;
@@ -128,7 +123,6 @@
     .status-aktif { background: #e6fffa; color: #2c7a7b; }
     .status-nonaktif { background: #fff5f5; color: #c53030; }
 
-    /* Action Buttons */
     .btn-action {
         padding: 8px;
         border-radius: 4px;
@@ -140,7 +134,6 @@
     .btn-edit { background: #f0f0f0; color: #333; }
     .btn-delete { background: #fff1f1; color: #e53e3e; border: none; cursor: pointer; }
 
-    /* Alerts */
     .alert-success {
         padding: 15px;
         background: #e6fffa;

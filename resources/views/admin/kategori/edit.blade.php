@@ -6,7 +6,6 @@
 @section('content')
 
 <style>
-    /* Section Header */
     .header-container {
         display: flex;
         align-items: center;
@@ -20,20 +19,19 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         margin: 0;
-        color: #fff; /* Tetap putih karena background utama gelap */
+        color: #fff;
     }
 
-    /* Solid White Card */
     .solid-card {
-        background: #ffffff; /* Putih Solid */
+        background: #ffffff;
         padding: 40px;
         border-radius: 12px;
         box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         max-width: 700px;
-        color: #333; /* Teks konten hitam agar kontras */
+        color: #333;
     }
 
-    /* Form Group */
+
     .form-group {
         margin-bottom: 25px;
     }
@@ -61,12 +59,11 @@
     }
 
     .form-control:focus {
-        border-color: #000; /* Border jadi hitam saat fokus */
+        border-color: #000;
         background: #fcfcfc;
         outline: none;
     }
 
-    /* Action Buttons */
     .action-wrapper {
         display: flex;
         gap: 15px;
@@ -116,7 +113,6 @@
         color: #000;
     }
 
-    /* Error Message */
     .error-msg {
         color: #e53e3e;
         font-size: 12px;
