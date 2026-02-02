@@ -15,19 +15,15 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-// =======================================================
-// AUTHENTICATION (Login & Logout)
-// =======================================================
-// Saya beri nama 'login' DAN 'login.page' agar tidak ada error RouteNotFound
+// Login & Logout
 Route::get('/login', [AuthController::class, 'loginView'])->name('login');
 Route::get('/login-page', [AuthController::class, 'loginView'])->name('login.page'); 
 
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// =======================================================
-// ADMIN AREA (Hanya bisa diakses Admin)
-// =======================================================
+// ADMIN
+
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
 
@@ -60,9 +56,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/laporan/cetak', [LaporanTransaksiController::class, 'cetak'])->name('admin.laporan.cetak');
 });
 
-// =======================================================
-// KASIR AREA (Hanya bisa diakses Kasir)
-// =======================================================
+// KASIR
 Route::middleware(['auth', 'kasir'])->group(function () {
     Route::get('/kasir/dashboard', [DashboardKasirController::class, 'index'])->name('kasir.dashboard');
 
@@ -79,13 +73,12 @@ Route::middleware(['auth', 'kasir'])->group(function () {
     // RIWAYAT TRANSAKSI
     Route::get('/riwayat', [TransaksiController::class, 'riwayat'])->name('riwayat.index');
 
-    // VIEW STOK (Fitur Baru Kasir)
+    // VIEW STOK
     Route::get('/kasir/stok', [ViewStokController::class, 'index'])->name('kasir.viewstok');
 });
 
-// =======================================================
-// AREA BERSAMA (Admin & Kasir BISA AKSES)
-// =======================================================
+// Admin & Kasir
+
 Route::middleware(['auth'])->group(function () {
     // Cetak Struk
     Route::get('/riwayat/{id}/struk', [TransaksiController::class, 'struk'])->name('transaksi.struk');
