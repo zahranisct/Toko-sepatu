@@ -6,7 +6,6 @@
 @section('content')
 
 <style>
-    /* Header Section */
     .header-section {
         display: flex;
         justify-content: space-between;
@@ -23,7 +22,7 @@
         color: #fff;
     }
 
-    /* Modern Button */
+
     .btn-add {
         padding: 12px 24px;
         background: #fff;
@@ -46,7 +45,6 @@
         transform: translateY(-2px);
     }
 
-    /* Filter & Search Card */
     .filter-card {
         background: #fff;
         padding: 25px;
@@ -96,7 +94,6 @@
         background: #333;
     }
 
-    /* Table Styling */
     .table-card {
         background: #fff;
         border-radius: 12px;
@@ -147,7 +144,6 @@
     .stok-aman { background: #e6fffa; color: #2c7a7b; }
     .stok-kritis { background: #fff5f5; color: #c53030; }
 
-    /* Action Buttons */
     .btn-action {
         padding: 6px 10px;
         border-radius: 4px;
@@ -162,7 +158,6 @@
 
     .btn-action:hover { opacity: 0.8; }
 
-    /* Alert */
     .alert-success {
         padding: 15px;
         background: #e6fffa;
@@ -249,7 +244,7 @@
                         Rp {{ number_format($p->harga, 0, ',', '.') }}
                     </td>
                     <td style="color: #888; font-size: 12px;">
-                        {{ $p->updated_at->format('d/m/y H:i') }}
+                        {{ $p->updated_at->format('d-m-y H:i') }}
                     </td>
                     <td style="text-align: center;">
                         <div style="display: flex; gap: 5px; justify-content: center;">
