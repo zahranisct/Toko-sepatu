@@ -129,7 +129,7 @@
     </div>
 
     <div class="menu">
-        <div class="menu-label">Navigation</div>
+        <div class="menu-label">Menu</div>
 
         @if(auth()->user()->role === 'admin')
             <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active':'' }}">
