@@ -135,17 +135,21 @@
             <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active':'' }}">
                 <i data-lucide="grid"></i> Dashboard
             </a>
-            <a href="{{ route('kategori.index') }}" class="{{ request()->is('kategori*') ? 'active':'' }}">
+            <a href="{{ route('kategori.index') }}" class="{{ request()->routeIs('kategori.index') ? 'active':'' }}">
                 <i data-lucide="tag"></i> Kategori
             </a>
-            <a href="{{ route('produk.index') }}" class="{{ request()->is('produk*') ? 'active':'' }}">
+            <a href="{{ route('produk.index') }}" class="{{ request()->routeIs('produk.index') ? 'active':'' }}">
                 <i data-lucide="package"></i> Produk
             </a>
-            <a href="{{ route('kasir.index') }}" class="{{ request()->is('kasir*') ? 'active':'' }}">
+            <a href="{{ route('kasir.index') }}" class="{{ request()->routeIs('kasir.index') ? 'active':'' }}">
                 <i data-lucide="users"></i> Kasir
             </a>
-            <a href="{{ route('admin.laporan') }}" class="{{ request()->is('admin/laporan*') ? 'active':'' }}">
+            <a href="{{ route('admin.laporan') }}" class="{{ request()->routeIs('admin.laporan') ? 'active':'' }}">
                 <i data-lucide="bar-chart-3"></i> Laporan
+            </a>
+            
+            <a href="{{ route('admin.rating.laporan') }}" class="{{ request()->routeIs('admin.rating.laporan') ? 'active':'' }}">
+                <i data-lucide="star"></i> Rating Pelayanan
             </a>
         @endif
 
@@ -159,8 +163,11 @@
             <a href="{{ route('riwayat.index') }}" class="{{ request()->routeIs('riwayat.index') ? 'active':'' }}">
                 <i data-lucide="history"></i> Riwayat
             </a>
+            <a href="{{ route('rating.index') }}" class="{{ request()->routeIs('rating.index') ? 'active':'' }}">
+                <i data-lucide="star"></i> Rating Pelayanan
+            </a>
             <a href="{{ route('kasir.viewstok') }}" class="{{ request()->routeIs('kasir.viewstok') ? 'active':'' }}">
-            <i data-lucide="box"></i> Stok
+                <i data-lucide="box"></i> Stok
             </a>
         @endif
     </div>

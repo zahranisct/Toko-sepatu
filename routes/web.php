@@ -10,24 +10,23 @@ use App\Http\Controllers\DashboardKasirController;
 use App\Http\Controllers\KasirController;
 use App\Http\Controllers\LaporanTransaksiController;
 use App\Http\Controllers\ViewStokController;
+use App\Http\Controllers\RatingController; 
 
 Route::get('/', function () {
     return redirect('/login');
 });
 
-// Login & Logout
+// AUTH
 Route::get('/login', [AuthController::class, 'loginView'])->name('login');
 Route::get('/login-page', [AuthController::class, 'loginView'])->name('login.page'); 
-
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // ADMIN
-
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
 
-    // KATEGORI
+    // MANAGEMENT KATEGORI
     Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
     Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori.create');
     Route::post('/kategori/store', [KategoriController::class, 'store'])->name('kategori.store');
@@ -35,7 +34,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/kategori/update/{id}', [KategoriController::class, 'update'])->name('kategori.update');
     Route::delete('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
-    // PRODUK
+    // MANAGEMENT PRODUK (Inventory)
     Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
     Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');
     Route::post('/produk', [ProdukController::class, 'store'])->name('produk.store');
@@ -43,7 +42,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/produk/update/{produk}', [ProdukController::class, 'update'])->name('produk.update');
     Route::delete('/produk/{produk}', [ProdukController::class, 'destroy'])->name('produk.delete');
 
-    // KASIR (Kelola User Kasir)
+    // MANAGEMENT USER KASIR
     Route::get('/kasir', [KasirController::class, 'index'])->name('kasir.index');
     Route::get('/kasir/create', [KasirController::class, 'create'])->name('kasir.create');
     Route::post('/kasir/store', [KasirController::class, 'store'])->name('kasir.store');
@@ -51,16 +50,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/kasir/update/{id}', [KasirController::class, 'update'])->name('kasir.update');
     Route::delete('/kasir/delete/{id}', [KasirController::class, 'destroy'])->name('kasir.delete');
 
-    // LAPORAN
+    // LAPORAN & RATING
     Route::get('/admin/laporan', [LaporanTransaksiController::class, 'index'])->name('admin.laporan');
     Route::get('/admin/laporan/cetak', [LaporanTransaksiController::class, 'cetak'])->name('admin.laporan.cetak');
+    Route::get('/admin/laporan-rating', [RatingController::class, 'laporan'])->name('admin.rating.laporan');
 });
 
 // KASIR
 Route::middleware(['auth', 'kasir'])->group(function () {
     Route::get('/kasir/dashboard', [DashboardKasirController::class, 'index'])->name('kasir.dashboard');
 
-    // TRANSAKSI
+    // Transaksi
     Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
     Route::post('/transaksi/tambah/{id}', [TransaksiController::class, 'tambahKeranjang'])->name('keranjang.tambah');
     Route::post('/transaksi/update-item', [TransaksiController::class, 'updateQty'])->name('transaksi.updateItem');
@@ -70,16 +70,16 @@ Route::middleware(['auth', 'kasir'])->group(function () {
     Route::get('/transaksi/pembayaran', [TransaksiController::class, 'pembayaran'])->name('transaksi.pembayaran');
     Route::post('/transaksi/simpan', [TransaksiController::class, 'simpanTransaksi'])->name('transaksi.simpan');
     
-    // RIWAYAT TRANSAKSI
-    Route::get('/riwayat', [TransaksiController::class, 'riwayat'])->name('riwayat.index');
+    // Rating
+    Route::get('/rating', [RatingController::class, 'index'])->name('rating.index');
+    Route::post('/rating/store', [RatingController::class, 'store'])->name('rating.store');
 
-    // VIEW STOK
+    // RIWAYAT & STOCK VIEW
+    Route::get('/riwayat', [TransaksiController::class, 'riwayat'])->name('riwayat.index');
     Route::get('/kasir/stok', [ViewStokController::class, 'index'])->name('kasir.viewstok');
 });
 
-// Admin & Kasir
-
+//Admin & Kasir
 Route::middleware(['auth'])->group(function () {
-    // Cetak Struk
     Route::get('/riwayat/{id}/struk', [TransaksiController::class, 'struk'])->name('transaksi.struk');
 });

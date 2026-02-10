@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('kasir', function (Blueprint $table) {
-        // Menambah kolom user_id setelah id
-        $table->foreignId('user_id')->after('id')->constrained('user')->onDelete('cascade');
-    });
+        if (!Schema::hasColumn('kasir', 'user_id')) {
+            Schema::table('kasir', function (Blueprint $table) {
+                $table->foreignId('user_id')->after('id')->constrained('user')->onDelete('cascade');
+            });
+        }
     }
 
     /**
@@ -23,7 +24,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('kasir', function (Blueprint $table) {
-            //
+            if (Schema::hasColumn('kasir', 'user_id')) {
+                $table->dropForeign(['user_id']);
+                $table->dropColumn('user_id');
+            }
         });
     }
 };
