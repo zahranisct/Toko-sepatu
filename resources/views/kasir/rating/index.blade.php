@@ -57,7 +57,7 @@
                             @else
                                 <span class="status-label">
                                     @if($t->rating_skor == 3) PUAS 
-                                    @elseif($t->rating_skor == 2) BIASA 
+                                    @elseif($t->rating_skor == 2) BIASA SAJA
                                     @else TIDAK PUAS @endif
                                 </span>
                             @endif
@@ -85,7 +85,7 @@
         <button onclick="closeRatingModal()" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 24px; cursor: pointer; font-weight: 300;">&times;</button>
         
         <h2 id="modalTitle" style="font-weight: 800; text-transform: uppercase; margin: 0; font-size: 22px; letter-spacing: -0.5px;"></h2>
-        <p style="font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; margin: 10px 0 40px; letter-spacing: 1px;">Bagaimana pengalaman pelanggan?</p>
+        <p style="font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; margin: 10px 0 40px; letter-spacing: 1px;">Apakah anda puas dengan pelayanan kami?</p>
         
         <form action="{{ route('rating.store') }}" method="POST">
             @csrf
@@ -95,7 +95,7 @@
                 
                 <button type="submit" name="skor" value="2" class="btn-rating-opt opt-biasa">Biasa Saja</button>
                 
-                <button type="submit" name="skor" value="1" class="btn-rating-opt opt-kecewa">Tidak Puas</button>
+                <button type="submit" name="skor" value="1" class="btn-rating-opt opt-tidakpuas">Tidak Puas</button>
             </div>
         </form>
     </div>
@@ -158,7 +158,7 @@
         color: #fff;
     }
 
-    .opt-kecewa:hover {
+    .opt-tidakpuas:hover {
         background: #c62828; 
         border-color: #c62828;
         color: #fff;
